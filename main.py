@@ -45,11 +45,18 @@ def config():
         population.initialize()
         population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
 
+        ga = GeneticAlgorithm(data, elitism_number, mutation_rate, crossover_rate, tournament_size, population_size)
+
+        while population.get_schedules()[0].get_fitness() != 1.0:
+            generation_number += 1
+            population = ga.develop_next_gen(population)
+            population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+
         pop_dict = {}
         fittest_schedule = {}
         for i in range(0, len(population.get_schedules())):
             new_dict = {
-                'number': i,
+                'number': i+1,
                 'classes': [str(class_) for class_ in population.get_schedules()[i].get_classes()],
                 'NOC': population.get_schedules()[i].get_number_of_conflict(),
                 'fitness': population.get_schedules()[i].get_fitness(),
@@ -58,17 +65,14 @@ def config():
 
         for j in range(0, len(population.get_schedules()[0].get_classes())):
             new_dict = {
-                'number': j,
+                'number': j+1,
                 'course': population.get_schedules()[0].get_classes()[j].course.name,
                 'room': population.get_schedules()[0].get_classes()[j].room.id,
                 'instructor': population.get_schedules()[0].get_classes()[j].instructor.name,
-                'session': population.get_schedules()[0].get_classes()[j].time_.session,
+                'session': population.get_schedules()[0].get_classes()[j].time_.id + "-->"
+                           + population.get_schedules()[0].get_classes()[j].time_.session,
             }
             fittest_schedule[f'class_number {j}'] = new_dict
-
-        print(f"Generation > {generation_number}")
-        table = display_control.print_population(population)
-        display_control.print_schedule(population.get_schedules()[0])
 
         # ga = GeneticAlgorithm(data, elitism_number, mutation_rate, crossover_rate, tournament_size, population_size)
         #
