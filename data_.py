@@ -24,6 +24,19 @@ class Data:
         self.set_courses()
         self.set_subject()
 
+        self.all_data = {
+            'Subjects': {'values': self.subjects,
+                         'att_list': self.subjects[0].__dict__.keys()},
+            'Courses': {'values': self.courses,
+                        'att_list': self.courses[0].__dict__.keys()},
+            'Instructors': {'values': self.instructors,
+                            'att_list': self.instructors[0].__dict__.keys()},
+            'Times': {'values': self.times,
+                      'att_list': self.times[0].__dict__.keys()},
+            'Rooms': {'values': self.rooms,
+                      'att_list': self.rooms[0].__dict__.keys()},
+        }
+
     def set_rooms(self):
         cursor = conn.execute("SELECT * FROM ROOM")
         for row in cursor:
@@ -67,10 +80,3 @@ class Data:
 
     def get_number_of_classes(self):
         return self.number_of_classes
-
-
-
-
-
-
-

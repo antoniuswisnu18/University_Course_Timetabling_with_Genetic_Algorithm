@@ -1,0 +1,8 @@
+{%include "header.html"%}
+{%import 'bootstrap/wtf.html' as wtf%}
+
+<form action="" method="post">
+    {{wtf.quick_form(form, button_map={'submit': 'dark'})}}
+</form>
+
+{%include "footer.html"%}

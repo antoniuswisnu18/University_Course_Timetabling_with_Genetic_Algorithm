@@ -19,6 +19,7 @@ class DisplayControl:
         for subject in subjects:
             subject_table.add_row([subject.id, subject.name, subject.semester, subject.sks])
         print(subject_table)
+        return subject_table.get_html_string()
 
     def print_course(self):
         courses = self.data.get_courses()
@@ -27,6 +28,7 @@ class DisplayControl:
         for course in courses:
             courses_table.add_row([course.id, course.name, course.number_of_students])
         print(courses_table)
+        return courses_table.get_html_string()
 
     def print_room(self):
         rooms = self.data.get_rooms()
@@ -35,6 +37,7 @@ class DisplayControl:
         for room in rooms:
             rooms_table.add_row([room.id, room.capacity])
         print(rooms_table)
+        return rooms_table.get_html_string()
 
     def print_time(self):
         times = self.data.get_times()
@@ -43,6 +46,7 @@ class DisplayControl:
         for time in times:
             times_table.add_row([time.id, time.session])
         print(times_table)
+        return times_table.get_html_string()
 
     def print_instructor(self):
         instructors = self.data.get_instructor()
@@ -50,6 +54,7 @@ class DisplayControl:
         for instructor in instructors:
             instructor_table.add_row([instructor.id, instructor.name])
         print(instructor_table)
+        return instructor_table.get_html_string()
 
     def print_population(self, population):
         pop_table = PrettyTable(["No.", "fitness", "NOC", "classes [course, instructor, session, room]"])
@@ -58,6 +63,7 @@ class DisplayControl:
             classes = [str(class_) for class_ in schedules[x].get_classes()]
             pop_table.add_row([str(x), round(schedules[x].get_fitness(), 3), schedules[x].number_of_conflict, classes])
         print(pop_table)
+        return pop_table
 
     def print_schedule(self, schedule):
         print(f"fitness of this schedule : {round(schedule.get_fitness(), 3)}")
@@ -69,4 +75,4 @@ class DisplayControl:
                                     f"{class_.room.id}({class_.room.capacity})", class_.instructor.name,
                                     class_.time_.id])
         print(schedule_table)
-
+        return schedule_table

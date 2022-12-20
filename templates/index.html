@@ -1,0 +1,36 @@
+{% include "header.html" %}
+
+
+{%for keys, values in all_data.items()%}
+
+<div class="container">
+
+    <h3>{{keys}}</h3>
+    <table class="table table-hover table-sm table-bordered table-responsive">
+        <thead>
+        <tr>
+            {%for x in values['att_list']%}
+            <th>{{x}}</th>
+            {%endfor%}
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {%for row in values['values']%}
+        <tr>
+            {%for att in values['att_list']%}
+            <td>{{row[att]}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+<br>
+{%endfor%}
+
+<div class="container-fluid">
+    <a type="button" class="btn btn-dark" href="{{url_for('config')}}">Next</a>
+</div>
+
+{%include "footer.html"%}

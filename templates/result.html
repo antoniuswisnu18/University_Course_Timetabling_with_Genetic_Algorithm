@@ -1,0 +1,54 @@
+{%include "header.html"%}
+
+<h1>List of Schedules</h1>
+<table class="table table-hover table-sm table-bordered table-responsive">
+    <thead>
+    <tr>
+        <th>No.</th>
+        <th>Fitness</th>
+        <th>Number of Conflict</th>
+        <th>Classes</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    {%for key,value in populations.items()%}
+    <tr>
+        <td>{{ value['number'] }}</td>
+        <td>{{ value["fitness"] }} </td>
+        <td>{{ value["NOC"] }} </td>
+        <td>{{ value["classes"] }} </td>
+    </tr>
+    {%endfor%}
+    </tbody>
+</table>
+
+<br>
+
+<h1>The Fittest Schedule</h1>
+<table class="table table-hover table-sm table-bordered table-responsive">
+    <thead>
+    <tr>
+        <th>No.</th>
+        <th>Course</th>
+        <th>Room</th>
+        <th>Instructor</th>
+        <th>Session</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    {%for key,value in schedule.items()%}
+    <tr>
+        <td>{{ value["number"] }}</td>
+        <td>{{ value["course"] }} </td>
+        <td>{{ value["room"] }} </td>
+        <td>{{ value["instructor"] }} </td>
+        <td>{{ value["session"] }}</td>
+    </tr>
+    {%endfor%}
+    </tbody>
+</table>
+
+<div class="container-fluid">
+    <a type="button" class="btn btn-dark" href="{{url_for('config')}}">See the fittest Schedule.</a>
+</div>
+{%include "footer.html"%}
